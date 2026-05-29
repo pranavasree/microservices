@@ -40,7 +40,7 @@ public class AccountsController {
 //    @ApiResponses({
 //            @ApiResponse(
 //                    responseCode = "201",
-//                    description = "HTTP Status CREATED"
+//                    description = "HTTP Status CREAT ED"
 //            ),
 //            @ApiResponse(
 //                    responseCode = "500",
@@ -77,14 +77,14 @@ public class AccountsController {
 //            )
 //    }
 //    )
-//    @GetMapping("/fetch")
-//    public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
-//                                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-//                                                           String mobileNumber) {
-//        CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
-//        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
-//    }
-//
+    @GetMapping("/fetch")
+    public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
+                                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                           String mobileNumber) {
+        CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
+    }
+
 //    @Operation(
 //            summary = "Update Account Details REST API",
 //            description = "REST API to update Customer &  Account details based on a account number"

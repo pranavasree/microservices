@@ -4,10 +4,12 @@ package com.pranava.accounts.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
-public class Customer {
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +20,9 @@ public class Customer {
 
     private String email;
 
+
     @Column(name="mobile_number")
     private String mobileNumber;
-
 
 
 }

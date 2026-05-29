@@ -6,6 +6,7 @@ import com.pranava.accounts.dto.CustomerDto;
 import com.pranava.accounts.entity.Accounts;
 import com.pranava.accounts.entity.Customer;
 import com.pranava.accounts.exception.CustomerAlreadyExistsException;
+import com.pranava.accounts.exception.ResourceNotFoundException;
 import com.pranava.accounts.mapper.AccountsMapper;
 import com.pranava.accounts.mapper.CustomerMapper;
 import com.pranava.accounts.repository.AccountsRepository;
@@ -14,6 +15,7 @@ import com.pranava.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -34,6 +36,9 @@ public class AccountsServiceImpl implements IAccountsService {
             throw new CustomerAlreadyExistsException("Customer already registered with given mobileNumber "
                     +customerDto.getMobileNumber());
         }
+
+        customer.setCreatedAt(LocalDateTime.now());
+        customer.setCreatedBy("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
     }
@@ -47,28 +52,36 @@ public class AccountsServiceImpl implements IAccountsService {
         newAccount.setCustomerId(customer.getCustomerId());
         long randomAccNumber = 1000000000L + new Random().nextInt(900000000);
 
+
+
         newAccount.setAccountNumber(randomAccNumber);
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
+
+        newAccount.setCreatedAt(LocalDateTime.now());
+        newAccount.setCreatedBy("Anonymous");
         return newAccount;
     }
 
-//    /**
-//     * @param mobileNumber - Input Mobile Number
-//     * @return Accounts Details based on a given mobileNumber
-//     */
-//    @Override
-//    public CustomerDto fetchAccount(String mobileNumber) {
-//        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
-//                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-//        );
-//        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
-//                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
-//        );
-//        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
-//        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
-//        return customerDto;
-//    }
+    /**
+     * @param mobileNumber - Input Mobile Number
+     * @return Accounts Details based on a given mobileNumber
+     */
+    @Override
+    public CustomerDto fetchAccount(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Account",
+                        "customerId",
+                        String.valueOf(customer.getCustomerId())
+                ));
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
+        return customerDto;
+    }
 //
 //    /**
 //     * @param customerDto - CustomerDto Object
