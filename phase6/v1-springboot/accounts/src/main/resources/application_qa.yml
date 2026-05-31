@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.O"
+
+
+accounts:
+  message: "Welcome to Bank accounts related QA APIs "
+  contactDetails:
+    name: "Smitha Ray - QA Lead"
+    email: "smitha@bank.com"
+  onCallSupport:
+    - (666) 555-1234
+    - (666) 523-1345

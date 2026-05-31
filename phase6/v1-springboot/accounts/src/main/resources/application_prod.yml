@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "1.O"
+
+
+accounts:
+  message: "Welcome to Bank accounts related Prod APIs "
+  contactDetails:
+    name: "Aishwarya - Product Owner"
+    email: "aish@bank.com"
+  onCallSupport:
+    - (555) 666-1234
+    - (555) 666-1345
