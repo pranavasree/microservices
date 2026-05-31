@@ -15,10 +15,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
 
 build:
   version: "1.O"
+
+
+accounts:
+  message: "Welcome to Bank accounts related local APIs "
+  contactDetails:
+    name: "John Doe - Developer"
+    email: "john@bank.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345

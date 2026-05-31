@@ -2,6 +2,7 @@ package com.pranava.accounts.controller;
 
 
 import com.pranava.accounts.constants.AccountsConstants;
+import com.pranava.accounts.dto.AccountsContactInfoDto;
 import com.pranava.accounts.dto.CustomerDto;
 import com.pranava.accounts.dto.ResponseDto;
 import com.pranava.accounts.service.IAccountsService;
@@ -36,6 +37,8 @@ public class AccountsController {
 
     private IAccountsService iAccountsService;
 
+
+
     public AccountsController(IAccountsService iAccountsService){
         this.iAccountsService = iAccountsService;
     }
@@ -45,6 +48,9 @@ public class AccountsController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
 //    @Operation(
 //            summary = "Create Account REST API",
@@ -240,12 +246,12 @@ public class AccountsController {
 //            )
 //    }
 //    )
-//    @GetMapping("/contact-info")
-//    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(accountsContactInfoDto);
-//    }
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
+    }
 
 
 }
