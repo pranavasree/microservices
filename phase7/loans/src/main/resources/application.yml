@@ -1,0 +1,35 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: "loans"
+  profiles:
+    active: "prod"
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: ''
+  datasource:
+    url: jdbc:mysql://localhost:3307/loans_db
+    username: root
+    password: root
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
