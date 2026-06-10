@@ -57,6 +57,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>io.opentelemetry.javaagent</groupId>
 			<artifactId>opentelemetry-javaagent</artifactId>
 			<version>${otelVersion}</version>
@@ -94,7 +99,7 @@
 				<version>3.5.1</version>
 				<configuration>
 					<to>
-						<image>pranavasree/${project.artifactId}:s13</image>
+						<image>pranavasree/${project.artifactId}:s14</image>
 					</to>
 				</configuration>
 			</plugin>
